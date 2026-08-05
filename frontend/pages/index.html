@@ -42,23 +42,37 @@
 
   <!-- ===== HERO SECTION ===== -->
   <section class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Discover what to<br><span class="highlight">cook next</span></h1>
-      <p class="hero-subtitle">Thousands of recipes. Zero decision fatigue.</p>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <span class="hero-badge">🍳 5,500+ Recipes Waiting</span>
+      <h1 class="hero-title">Order the <span class="highlight">best flavors</span><br>in your kitchen</h1>
+      <p class="hero-subtitle">Thousands of recipes, curated and ready. Zero decision fatigue.</p>
 
       <div class="floating-search">
         <i class="bi bi-search"></i>
-        <input type="text" id="heroSearchInput" placeholder="Search recipes, ingredients, cuisines...">
+        <input type="text" id="heroSearchInput" placeholder="Search recipes, ingredients...">
         <button id="heroSearchBtn">Search</button>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-number">5,500+</span><span class="stat-label">Recipes</span></div>
-        <div class="stat"><span class="stat-number">10</span><span class="stat-label">Categories</span></div>
-        <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Free</span></div>
+      <div class="hero-cta-row">
+        <button class="btn-primary-glow">Explore Recipes</button>
+        <button class="btn-outline-ghost" id="surpriseMeBtn">Surprise Me</button>
       </div>
     </div>
-  </section>
+
+    <div class="hero-visual">
+      <img src="https://foodish-api.com/images/pizza/pizza29.jpg" alt="Featured dish" class="hero-main-image">
+      <div class="floating-stat-card stat-card-1">
+        <span class="stat-number">5,500+</span>
+        <span class="stat-label">Recipes</span>
+      </div>
+      <div class="floating-stat-card stat-card-2">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Free Forever</span>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- ===== TRENDING SECTION ===== -->
   <section id="trending" class="section-block">

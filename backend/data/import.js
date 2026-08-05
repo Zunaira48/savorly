@@ -1,8 +1,7 @@
 // backend/data/import.js
 // Purpose: One-time script. Reads RAW_recipes.csv, cleans the messy data,
-// and inserts a curated ~5,500 recipes into our SQLite database.
-// Run this manually whenever you want to (re)build the database — it is NOT
-// part of the live server.
+// and inserts a curated ~5,500 recipes into our SQLite database, assigning
+// each one a real food photo from our pre-fetched Unsplash image pool.
 
 const fs = require('fs');
 const path = require('path');
@@ -12,8 +11,11 @@ const db = require('../config/database');
 const CSV_PATH = path.join(__dirname, 'raw', 'RAW_recipes.csv');
 const TARGET_COUNT = 5500;
 
-// Category keywords — we scan each recipe's tags to guess a clean category.
-// This turns messy raw tags into something our UI can filter by.
+// Load our pre-fetched pool of real food images (built by fetchImages.js).
+const imagePool = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'imagePool.json'), 'utf-8')
+);
+
 const CATEGORY_MAP = {
   breakfast: ['breakfast', 'brunch'],
   dessert: ['dessert', 'cake', 'cookie', 'sweet'],
@@ -36,22 +38,17 @@ function detectCategory(tags) {
   return 'general';
 }
 
-// The raw data stores time in minutes only — we translate that into
-// a difficulty label our cards can display.
 function detectDifficulty(minutes, nSteps) {
   if (minutes <= 20 && nSteps <= 5) return 'Easy';
   if (minutes <= 60 && nSteps <= 12) return 'Medium';
   return 'Hard';
 }
 
-// The raw 'ingredients' and 'steps' columns look like Python list strings,
-// e.g. "['flour', 'sugar', 'eggs']" — this converts that text into a real
-// JavaScript array so we can store it as clean JSON.
 function parsePythonListString(rawString) {
   try {
     const cleaned = rawString
-      .replace(/^\[|\]$/g, '')       // remove outer brackets
-      .split("', '")                  // split items apart
+      .replace(/^\[|\]$/g, '')
+      .split("', '")
       .map((item) => item.replace(/^'|'$/g, '').trim())
       .filter((item) => item.length > 0);
     return cleaned;
@@ -60,8 +57,6 @@ function parsePythonListString(rawString) {
   }
 }
 
-// The 'nutrition' column looks like "[calories, fat, sugar, sodium, protein, ...]"
-// We only need calories for the card display, so we grab the first number.
 function extractCalories(nutritionString) {
   try {
     const match = nutritionString.match(/\[([\d.]+)/);
@@ -71,20 +66,18 @@ function extractCalories(nutritionString) {
   }
 }
 
-// Simple placeholder image assignment based on category —
-// avoids having to match every single recipe to a literal photo.
-const IMAGE_BY_CATEGORY = {
-  breakfast: 'https://source.unsplash.com/800x600/?breakfast,food',
-  dessert: 'https://source.unsplash.com/800x600/?dessert,cake',
-  vegan: 'https://source.unsplash.com/800x600/?vegan,food',
-  vegetarian: 'https://source.unsplash.com/800x600/?vegetarian,food',
-  seafood: 'https://source.unsplash.com/800x600/?seafood,fish',
-  'quick-meals': 'https://source.unsplash.com/800x600/?quickmeal,food',
-  soup: 'https://source.unsplash.com/800x600/?soup,food',
-  salad: 'https://source.unsplash.com/800x600/?salad,food',
-  main: 'https://source.unsplash.com/800x600/?dinner,food',
-  general: 'https://source.unsplash.com/800x600/?food,cooking',
-};
+// Picks a real food photo for this recipe, using its own ID to
+// consistently land on the same image every time (not random per reload).
+function getImageUrl(category, originalId) {
+  const images = imagePool[category];
+  if (!images || images.length === 0) {
+    // Fallback to 'general' pool if a category's pool is empty for any reason.
+    const fallbackImages = imagePool['general'];
+    return fallbackImages[originalId % fallbackImages.length];
+  }
+  const index = originalId % images.length;
+  return images[index];
+}
 
 async function runImport() {
   console.log('Starting import... this will take a minute for a 287MB file.');
@@ -98,8 +91,6 @@ async function runImport() {
        @n_ingredients, @calories, @tags, @category, @difficulty, @image_url)
   `);
 
-  // Wrapping all inserts in a single transaction makes this dramatically
-  // faster — thousands of individual inserts vs. one batched commit.
   const insertMany = db.transaction((rows) => {
     for (const row of rows) insertStmt.run(row);
   });
@@ -112,9 +103,6 @@ async function runImport() {
       .pipe(csv())
       .on('data', (row) => {
         if (insertedCount >= TARGET_COUNT) return;
-
-        // Skip incomplete rows — no name, no steps, or no ingredients means
-        // we can't build a usable recipe card/detail page from it.
         if (!row.name || !row.steps || !row.ingredients) return;
 
         const ingredientsArray = parsePythonListString(row.ingredients);
@@ -125,9 +113,10 @@ async function runImport() {
         const category = detectCategory(row.tags || '');
         const minutes = parseInt(row.minutes, 10) || 0;
         const nSteps = parseInt(row.n_steps, 10) || stepsArray.length;
+        const originalId = parseInt(row.id, 10) || 0;
 
         batch.push({
-          original_id: parseInt(row.id, 10) || null,
+          original_id: originalId,
           name: row.name.trim(),
           description: (row.description || '').trim().slice(0, 500),
           minutes,
@@ -139,12 +128,11 @@ async function runImport() {
           tags: row.tags || '',
           category,
           difficulty: detectDifficulty(minutes, nSteps),
-          image_url: IMAGE_BY_CATEGORY[category],
+          image_url: getImageUrl(category, originalId),
         });
 
         insertedCount++;
 
-        // Insert in chunks of 500 to keep memory usage reasonable.
         if (batch.length >= 500) {
           insertMany(batch.splice(0, batch.length));
           console.log(`Inserted ${insertedCount} recipes so far...`);
