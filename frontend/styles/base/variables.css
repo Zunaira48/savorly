@@ -1,0 +1,38 @@
+/* frontend/styles/base/variables.css
+   Purpose: Defines every color, spacing, and typography value ONCE.
+   Every other CSS file references these variables instead of hardcoding
+   colors — change a value here, and it updates site-wide instantly. */
+
+:root {
+  /* === Colors: Dark Luxury Kitchen palette === */
+  --color-bg: #0D0D0F;
+  --color-bg-elevated: #16161A;
+  --color-primary: #F5A623;
+  --color-secondary: #E85D4C;
+  --color-success: #7FB88A;
+  --color-text-primary: #F4F1EC;
+  --color-text-secondary: #9B9B9F;
+  --color-glass: rgba(255, 255, 255, 0.06);
+  --color-glass-border: rgba(255, 255, 255, 0.12);
+
+  /* === Typography === */
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 3rem;
+
+  /* === Spacing scale (used for margin/padding consistency) === */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* === Effects === */
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-glow: 0 8px 32px rgba(245, 166, 35, 0.15);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

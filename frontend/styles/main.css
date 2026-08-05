@@ -1,0 +1,26 @@
+/* frontend/styles/main.css
+   Purpose: General page layout rules that aren't specific to one component. */
+
+.section-block {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.section-header h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.section-header p {
+  color: var(--color-text-secondary);
+}
+
+.savorly-footer {
+  text-align: center;
+  padding: var(--space-lg);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-glass-border);
+  margin-top: var(--space-xl);
+}

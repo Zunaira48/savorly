@@ -1,0 +1,102 @@
+/* frontend/styles/components/card.css
+   Purpose: Styles the recipe card used across Trending, Latest, Categories,
+   Search results — every part of the site reuses this same card. */
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.recipe-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+  border-color: var(--color-primary);
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: var(--color-bg);
+}
+
+.recipe-card-body {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.recipe-card-title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.recipe-card-meta {
+  display: flex;
+  gap: var(--space-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.recipe-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.difficulty-badge {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  background: rgba(13, 13, 15, 0.8);
+  backdrop-filter: blur(6px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.difficulty-Easy { color: var(--color-success); }
+.difficulty-Medium { color: var(--color-primary); }
+.difficulty-Hard { color: var(--color-secondary); }
+
+/* Category buttons */
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.category-btn {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: var(--transition-smooth);
+}
+
+.category-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  transform: scale(1.05);
+}
