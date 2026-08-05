@@ -1,6 +1,5 @@
 // frontend/scripts/api/recipeApi.js
-// Purpose: Centralizes every fetch call to our backend. If the API URL
-// ever changes (e.g., moving to a deployed server), we only update it here.
+// Purpose: Centralizes every fetch call to our backend.
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -25,5 +24,11 @@ async function fetchByCategory(category) {
 async function searchRecipes(query) {
   const res = await fetch(`${API_BASE_URL}/recipes/search?q=${encodeURIComponent(query)}`);
   if (!res.ok) throw new Error('Search failed');
+  return res.json();
+}
+
+async function fetchRandomRecipe() {
+  const res = await fetch(`${API_BASE_URL}/recipes/random`);
+  if (!res.ok) throw new Error('Failed to fetch random recipe');
   return res.json();
 }

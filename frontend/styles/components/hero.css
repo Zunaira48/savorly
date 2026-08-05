@@ -54,8 +54,53 @@
 }
 
 .hero .floating-search {
-  margin: 0 0 var(--space-md) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-glow);
   max-width: 480px;
+  margin: 0 0 var(--space-md) 0;
+  transition: var(--transition-smooth);
+}
+
+.hero .floating-search i {
+  color: var(--color-text-secondary);
+}
+
+.floating-search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  padding: 0.6rem 0;
+}
+
+.floating-search input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.floating-search button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition-smooth);
+}
+
+.floating-search button:hover {
+  background: var(--color-secondary);
+  transform: scale(1.03);
 }
 
 .hero-cta-row {

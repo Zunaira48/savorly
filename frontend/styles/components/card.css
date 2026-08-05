@@ -1,22 +1,23 @@
 /* frontend/styles/components/card.css
-   Purpose: Pinterest-style masonry recipe grid — image-forward cards
-   with varied heights, minimal overlay text, premium dark aesthetic. */
+   Purpose: Uniform equal-size recipe card grid — every card the same
+   dimensions, consistent rows, clean premium look (not masonry). */
 
 .recipe-grid {
-  columns: 4 280px;      /* Masonry via CSS columns — responsive, adjusts count automatically */
-  column-gap: var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
   margin-top: var(--space-lg);
 }
 
 .recipe-card {
-  break-inside: avoid;     /* Prevents a card from splitting across columns */
-  margin-bottom: var(--space-md);
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
   cursor: pointer;
   background: var(--color-bg-elevated);
   transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
 }
 
 .recipe-card:hover {
@@ -26,16 +27,11 @@
 
 .recipe-card-image {
   width: 100%;
+  aspect-ratio: 4 / 3;   /* every card gets the exact same image proportions */
+  object-fit: cover;
   display: block;
-  /* Varied heights per card create the Pinterest "staggered" feel */
 }
 
-/* Cycle through a few height variants for visual rhythm */
-.recipe-card:nth-child(3n) .recipe-card-image { aspect-ratio: 4 / 5; object-fit: cover; }
-.recipe-card:nth-child(3n+1) .recipe-card-image { aspect-ratio: 1 / 1; object-fit: cover; }
-.recipe-card:nth-child(3n+2) .recipe-card-image { aspect-ratio: 4 / 3; object-fit: cover; }
-
-/* Overlay gradient so text sits directly on the image, not in a separate box */
 .recipe-card-overlay {
   position: absolute;
   bottom: 0;
@@ -86,7 +82,6 @@
 .difficulty-Medium { color: var(--color-primary); }
 .difficulty-Hard { color: var(--color-secondary); }
 
-/* Category buttons — softer, pill-shaped, gold-forward like your references */
 .category-buttons {
   display: flex;
   flex-wrap: wrap;
