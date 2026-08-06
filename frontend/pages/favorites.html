@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorites — Savorly</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/base/variables.css">
+  <link rel="stylesheet" href="../styles/components/buttons.css">
+  <link rel="stylesheet" href="../styles/base/reset.css">
+  <link rel="stylesheet" href="../styles/components/navbar.css">
+  <link rel="stylesheet" href="../styles/components/card.css">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+
+  <nav class="savorly-navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <span class="brand-icon">🍳</span> Savorly
+      </a>
+      <div class="navbar-links">
+        <a href="search.html">Browse</a>
+        <a href="favorites.html">Favorites</a>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="bi bi-moon-stars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section-block">
+    <div class="section-header">
+      <h2>My Favorites</h2>
+      <p>Recipes you've saved on this device</p>
+    </div>
+    <div id="favoritesGrid" class="recipe-grid"></div>
+    <p id="emptyFavoritesMsg" class="no-results-msg" style="display: none;">
+      You haven't saved any recipes yet. Browse recipes and tap the heart icon to save them here.
+    </p>
+  </section>
+
+  <footer class="savorly-footer">
+    <p>&copy; 2026 Savorly. Built as a portfolio project.</p>
+  </footer>
+
+  <script src="../scripts/utils/favorites.js"></script>
+  <script src="../scripts/api/recipeApi.js"></script>
+  <script src="../scripts/components/recipeCard.js"></script>
+  <script src="../scripts/pages/favorites.js"></script>
+</body>
+</html>

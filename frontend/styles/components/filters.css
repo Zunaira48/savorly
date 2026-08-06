@@ -1,0 +1,44 @@
+/* frontend/styles/components/filters.css
+   Purpose: Styles the filter bar on the search/browse page. */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin: var(--space-lg) 0;
+  padding: var(--space-md);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+}
+
+.filter-search-input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.filter-search-input:focus {
+  border-color: var(--color-primary);
+}
+
+.filter-select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  color: var(--color-text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+.no-results-msg {
+  text-align: center;
+  color: var(--color-text-secondary);
+  padding: var(--space-xl);
+}

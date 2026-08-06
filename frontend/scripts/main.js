@@ -55,9 +55,33 @@ document.getElementById('heroSearchInput')?.addEventListener('keypress', (e) => 
   if (e.key === 'Enter') handleHeroSearch();
 });
 
+// Category buttons — clicking one navigates to the browse page filtered
+// by that category.
+document.getElementById('categoryButtons')?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.category-btn');
+  if (btn) {
+    window.location.href = `search.html?category=${btn.dataset.category}`;
+  }
+});
+
+// "Explore Recipes" — browse everything, no filters
+document.querySelector('.btn-primary-glow')?.addEventListener('click', () => {
+  window.location.href = 'search.html';
+});
+
+// "Surprise Me" — fetch one random recipe and jump straight to its detail page
+document.getElementById('surpriseMeBtn')?.addEventListener('click', async () => {
+  try {
+    const recipe = await fetchRandomRecipe();
+    window.location.href = `recipe.html?id=${recipe.id}`;
+  } catch (err) {
+    console.error('Surprise Me failed:', err);
+  }
+});
+
 function handleHeroSearch() {
   const query = document.getElementById('heroSearchInput').value.trim();
   if (query) {
-    console.log('Searching for:', query);
+    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
   }
 }

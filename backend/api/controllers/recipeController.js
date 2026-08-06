@@ -52,6 +52,27 @@ function random(req, res) {
 function categories(req, res) {
   res.json(recipeModel.getAllCategories());
 }
+function filterRecipes(req, res) {
+  const { q, category, difficulty, maxTime, limit, offset } = req.query;
+  const results = recipeModel.filterRecipes({
+    query: q,
+    category,
+    difficulty,
+    maxTime: maxTime ? parseInt(maxTime, 10) : null,
+    limit: limit ? parseInt(limit, 10) : 24,
+    offset: offset ? parseInt(offset, 10) : 0,
+  });
+  res.json(results.map(formatRecipe));
+}
+
+function related(req, res) {
+  const recipe = recipeModel.getRecipeById(req.params.id);
+  if (!recipe) {
+    return res.status(404).json({ error: 'Recipe not found' });
+  }
+  const relatedRecipes = recipeModel.getRelatedRecipes(recipe.category, recipe.id);
+  res.json(relatedRecipes.map(formatRecipe));
+}
 
 module.exports = {
   listRecipes,
@@ -60,4 +81,6 @@ module.exports = {
   byCategory,
   random,
   categories,
+  filterRecipes,
+  related,
 };
