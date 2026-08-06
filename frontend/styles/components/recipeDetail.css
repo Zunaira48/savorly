@@ -154,7 +154,7 @@
   font-size: 0.9rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .recipe-columns { grid-template-columns: 1fr; }
 }
 
@@ -166,4 +166,10 @@
   .recipe-title, .recipe-stat, .recipe-ingredients li, .recipe-steps li {
     color: black !important;
   }
+}
+
+@media (max-width: 600px) {
+  .recipe-hero-image { max-height: 220px; }
+  .recipe-stats-row { gap: var(--space-sm); font-size: var(--font-size-sm); }
+  .recipe-actions { flex-wrap: wrap; }
 }

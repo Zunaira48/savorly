@@ -76,3 +76,16 @@
   background: var(--color-primary);
   color: var(--color-bg);
 }
+
+@media (max-width: 600px) {
+  .back-to-top-btn {
+    width: 40px;
+    height: 40px;
+    bottom: var(--space-md);
+    left: var(--space-md);
+  }
+
+  .scroll-progress-bar {
+    height: 2px;
+  }
+}

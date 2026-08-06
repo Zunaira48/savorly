@@ -151,3 +151,23 @@
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { order: -1; margin-bottom: var(--space-md); }
 }
+
+@media (max-width: 900px) {
+  .hero-cta-row {
+    flex-direction: column;
+  }
+  .hero {
+    padding-top: calc(var(--space-xl) + 100px);
+  }
+  .hero-cta-row button {
+    width: 100%;
+  }
+
+  .floating-stat-card {
+    display: none; /* Floating stat cards overflow awkwardly on small screens */
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+}

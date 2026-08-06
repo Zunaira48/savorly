@@ -20,19 +20,28 @@
 <body>
 
   <nav class="savorly-navbar">
-    <div class="navbar-inner">
-      <a href="index.html" class="navbar-brand">
-        <span class="brand-icon">🍳</span> Savorly
-      </a>
-      <div class="navbar-links">
-        <a href="search.html">Browse</a>
-        <a href="favorites.html">Favorites</a>
-      </div>
-      <button class="theme-toggle" aria-label="Toggle theme">
-        <i class="bi bi-moon-stars"></i>
-      </button>
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-icon">🍳</span> Savorly
+    </a>
+    <div class="navbar-links">
+      <a href="search.html">Browse</a>
+      <a href="favorites.html">Favorites</a>
     </div>
-  </nav>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <i class="bi bi-moon-stars"></i>
+    </button>
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="search.html">Browse</a>
+  <a href="favorites.html">Favorites</a>
+</div>
   <div id="scrollProgressBar" class="scroll-progress-bar"></div>
 <button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
   <i class="bi bi-arrow-up"></i>
@@ -61,5 +70,6 @@
   <script src="../scripts/pages/favorites.js"></script>
   <script src="../scripts/utils/toast.js"></script>
   <script src="../scripts/utils/scrollUtils.js"></script>
+  <script src="../scripts/utils/mobileMenu.js"></script>
 </body>
 </html>
