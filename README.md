@@ -1,18 +1,123 @@
-# Savorly 🍳
+# 🍳 Savorly — Recipe Discovery Platform
 
-A modern recipe discovery platform built with Node.js, Express, SQLite, and vanilla JavaScript.
+> Discover what to cook next. A modern, full-stack recipe discovery platform built with Node.js, Express, SQLite, and vanilla JavaScript.
 
-## Status
-🚧 Currently in active development.
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## Tech Stack
-- Frontend: HTML5, CSS3, Bootstrap 5, Vanilla JS
-- Backend: Node.js, Express.js
-- Database: SQLite (better-sqlite3)
+## 📖 Overview
 
-## Setup
-1. Clone this repo
-2. `cd backend && npm install`
-3. Download `RAW_recipes.csv` from [Kaggle](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions) into `backend/data/raw/`
-4. `node data/import.js` to build the database
-5. `node server.js` to start the API on port 5000
+Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 curated recipes. Built with a dark, premium aesthetic inspired by modern consumer products, it demonstrates full-stack development: a REST API backend, a SQLite database, and a responsive, animated frontend — all without a heavy frontend framework.
+
+## ✨ Features
+
+- 🔍 Live search with combinable filters (category, difficulty, cook time)
+- 📖 Detailed recipe pages with ingredients, steps, and nutrition info
+- ❤️ Favorites system (persisted via localStorage)
+- 🎲 "Surprise Me" random recipe discovery
+- 🌗 Light/dark theme toggle (persists across sessions)
+- 📱 Fully responsive, including a mobile hamburger menu
+- 🖨️ Print-friendly recipe pages
+- 🔗 Native share sheet integration
+- ✨ Skeleton loading states, toast notifications, scroll-reveal animations
+- 📊 Scroll progress bar and back-to-top button
+
+## 🛠️ Tech Stack
+
+**Frontend:** HTML5, CSS3, Bootstrap 5, Vanilla JavaScript
+**Backend:** Node.js, Express.js
+**Database:** SQLite (via better-sqlite3)
+**Images:** Unsplash API
+**Version Control:** Git & GitHub
+
+## 📸 Screenshots
+
+| Homepage | Recipe Detail |
+|---|---|
+| ![Homepage](docs/screenshots/homepage.png) | ![Recipe Detail](docs/screenshots/recipe-detail.png) |
+
+| Search & Filters | Mobile View |
+|---|---|
+| ![Search](docs/screenshots/search-filters.png) | ![Mobile](docs/screenshots/mobile-view.png) |
+
+## 📁 Project Structure
+
+```
+Recipe_Book/
+├── frontend/
+│   ├── pages/          # HTML pages (index, search, recipe, favorites)
+│   ├── styles/         # CSS — base tokens, components, page-specific
+│   ├── scripts/        # JS — API layer, components, utilities, pages
+│   └── assets/
+├── backend/
+│   ├── api/
+│   │   ├── routes/       # URL → controller mapping
+│   │   ├── controllers/  # Request/response handling
+│   │   └── models/       # Database queries
+│   ├── config/          # Database connection setup
+│   └── data/            # Import script, raw CSV, generated database
+├── docs/
+│   ├── screenshots/     # README images
+│   ├── ARCHITECTURE.md
+│   └── DESIGN.md
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- A free [Unsplash Developer](https://unsplash.com/developers) account
+
+### Installation
+
+```bash
+git clone https://github.com/Zunaira48/savorly.git
+cd Recipe_Book/backend
+npm install
+```
+
+### Set Up the Database
+
+1. Download `RAW_recipes.csv` from [Kaggle's Food.com dataset](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions) and place it at `backend/data/raw/RAW_recipes.csv`
+2. Create `backend/.env` with your Unsplash key:
+   ```
+   UNSPLASH_ACCESS_KEY=your_key_here
+   ```
+3. Build the image pool and import the recipes:
+   ```bash
+   node data/fetchImages.js
+   node data/import.js
+   ```
+
+### Run the App
+
+```bash
+node server.js
+```
+
+Backend runs at `http://localhost:5000`. Open `frontend/pages/index.html` with a local server (e.g. VS Code's Live Server extension) to run the frontend.
+
+## 🗺️ Future Improvements
+
+- User accounts with cloud-synced favorites
+- Full mobile navigation redesign beyond the current hamburger menu
+- Recipe submission / user-generated content
+- Nutrition-based filtering
+- Meal planning calendar
+- Migrate database to a persistent hosted solution (e.g. PostgreSQL) for production deployment
+
+## ⚠️ Known Limitations
+
+- Favorites are stored per-device (localStorage), not synced across devices — no user accounts yet
+- On serverless deployment platforms, the SQLite database is read-only in production; recipes must be imported locally before deploying
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+## 🙏 Credits
+
+- Recipe data: [Food.com Recipes and Interactions](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions) (Kaggle)
+- Images: [Unsplash](https://unsplash.com)
+- Icons: [Bootstrap Icons](https://icons.getbootstrap.com/)
