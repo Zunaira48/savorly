@@ -20,6 +20,7 @@ async function loadHeroImage() {
 }
 
 async function loadTrending() {
+  renderSkeletons('trendingGrid', 8);
   try {
     const trending = await fetchRecipes(8);
     renderCardGrid(trending, 'trendingGrid');
@@ -29,6 +30,7 @@ async function loadTrending() {
 }
 
 async function loadLatest() {
+  renderSkeletons('latestGrid', 8);
   try {
     const latest = await fetchRecipes(8);
     renderCardGrid(latest, 'latestGrid');

@@ -81,6 +81,7 @@ function updateHeading() {
 }
 
 async function runSearch() {
+  renderSkeletons('resultsGrid', 8);
   const q = document.getElementById('searchInput').value.trim();
   const category = document.getElementById('categoryFilter').value;
   const difficulty = document.getElementById('difficultyFilter').value;

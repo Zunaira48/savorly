@@ -14,8 +14,12 @@
   <link rel="stylesheet" href="../styles/base/reset.css">
   <link rel="stylesheet" href="../styles/components/navbar.css">
   <link rel="stylesheet" href="../styles/components/card.css">
+  <link rel="stylesheet" href="../styles/components/skeleton.css">
   <link rel="stylesheet" href="../styles/components/filters.css">
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/components/toast.css">
+  <link rel="stylesheet" href="../styles/components/recipeDetail.css">
+
 </head>
 <body>
 
@@ -33,6 +37,10 @@
       </button>
     </div>
   </nav>
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
+<button id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
 
   <section class="section-block">
     <div class="section-header">
@@ -72,9 +80,12 @@
     <p>&copy; 2026 Savorly. Built as a portfolio project.</p>
   </footer>
 
-  <script src="../scripts/utils/favorites.js"></script>
   <script src="../scripts/api/recipeApi.js"></script>
+  <script src="../scripts/utils/skeleton.js"></script>
   <script src="../scripts/components/recipeCard.js"></script>
+  <script src="../scripts/utils/scrollReveal.js"></script>
   <script src="../scripts/pages/searchResults.js"></script>
+  <script src="../scripts/utils/toast.js"></script>
+  <script src="../scripts/utils/scrollUtils.js"></script>
 </body>
 </html>

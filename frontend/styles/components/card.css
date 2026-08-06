@@ -1,8 +1,8 @@
 /* frontend/styles/components/card.css
-   Purpose: Uniform equal-size recipe card grid — every card the same
-   dimensions, consistent rows, clean premium look (not masonry). */
+  Purpose: Uniform equal-size recipe card grid — every card the same
+  dimensions, consistent rows, clean premium look (not masonry). */
 
-.recipe-grid {
+   .recipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-md);

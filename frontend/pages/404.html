@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Savorly</title>
+
+  <link rel="stylesheet" href="../styles/base/variables.css">
+  <link rel="stylesheet" href="../styles/base/reset.css">
+  <link rel="stylesheet" href="../styles/components/buttons.css">
+</head>
+<body>
+  <div class="not-found-wrapper">
+    <span class="not-found-emoji">🍳</span>
+    <h1>404 — Recipe Not Found</h1>
+    <p>Looks like this page got left in the oven too long.</p>
+    <a href="index.html" class="btn-primary-glow">Back to Home</a>
+  </div>
+
+  <style>
+    .not-found-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: var(--space-sm);
+      padding: var(--space-lg);
+    }
+    .not-found-emoji { font-size: 4rem; }
+    .not-found-wrapper h1 { font-size: var(--font-size-xl); font-weight: 800; }
+    .not-found-wrapper p { color: var(--color-text-secondary); margin-bottom: var(--space-md); }
+  </style>
+  <script src="../scripts/utils/scrollUtils.js"></script>
+</body>
+</html>

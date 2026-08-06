@@ -1,0 +1,43 @@
+/* frontend/styles/components/skeleton.css
+   Purpose: Pulsing placeholder cards shown while real data is loading,
+   instead of a blank gap — a standard premium-product pattern. */
+
+.skeleton-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    100deg,
+    var(--color-bg-elevated) 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    var(--color-bg-elevated) 70%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 14px;
+  margin: var(--space-sm);
+  border-radius: 4px;
+  background: linear-gradient(
+    100deg,
+    var(--color-bg-elevated) 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    var(--color-bg-elevated) 70%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+.skeleton-text.short { width: 60%; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -34,6 +34,7 @@ function renderCardGrid(recipes, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = recipes.map(renderRecipeCard).join('');
   attachFavoriteHandlers(container);
+  refreshScrollReveal('.recipe-card');
 }
 
 // Wires up every heart button inside a container — called after
@@ -41,12 +42,13 @@ function renderCardGrid(recipes, containerId) {
 function attachFavoriteHandlers(container) {
   container.querySelectorAll('.favorite-heart').forEach((btn) => {
     btn.addEventListener('click', (e) => {
-      e.preventDefault();   // don't follow the card's link
-      e.stopPropagation();  // don't bubble up to the card link
+      e.preventDefault();
+      e.stopPropagation();
       const id = parseInt(btn.dataset.id, 10);
       const nowFavorited = toggleFavorite(id);
       btn.classList.toggle('is-favorited', nowFavorited);
       btn.querySelector('i').className = nowFavorited ? 'bi bi-heart-fill' : 'bi bi-heart';
+      showToast(nowFavorited ? 'Added to favorites!' : 'Removed from favorites');
     });
   });
 }

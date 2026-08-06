@@ -74,13 +74,13 @@ function renderRecipe(recipe) {
   `;
 
   // Favorite button on the detail page itself
-  document.getElementById('detailFavoriteBtn').addEventListener('click', (e) => {
+ document.getElementById('detailFavoriteBtn').addEventListener('click', (e) => {
     const btn = e.currentTarget;
     const nowFavorited = toggleFavorite(recipe.id);
     btn.classList.toggle('is-favorited', nowFavorited);
     btn.querySelector('i').className = nowFavorited ? 'bi bi-heart-fill' : 'bi bi-heart';
+    showToast(nowFavorited ? 'Added to favorites!' : 'Removed from favorites');
   });
-
   // Print — just uses the browser's native print, styled cleanly via CSS
   document.getElementById('printBtn').addEventListener('click', () => window.print());
 
