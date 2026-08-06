@@ -36,3 +36,13 @@
   --shadow-glow: 0 8px 32px rgba(245, 166, 35, 0.15);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Light theme overrides — activated when <html data-theme="light"> */
+html[data-theme="light"] {
+  --color-bg: #F7F5F1;
+  --color-bg-elevated: #FFFFFF;
+  --color-text-primary: #1A1A1D;
+  --color-text-secondary: #6B6B6F;
+  --color-glass: rgba(0, 0, 0, 0.04);
+  --color-glass-border: rgba(0, 0, 0, 0.10);
+}

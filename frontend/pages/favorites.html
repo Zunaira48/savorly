@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Favorites — Savorly</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../styles/components/skeleton.css">
-  <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/components/toast.css">
-  <link rel="stylesheet" href="../styles/components/recipeDetail.css">
-  <link rel="stylesheet" href="../styles/base/variables.css">
-  <link rel="stylesheet" href="../styles/components/buttons.css">
-
+<link rel="stylesheet" href="../styles/base/variables.css">
+<link rel="stylesheet" href="../styles/base/reset.css">
+<link rel="stylesheet" href="../styles/components/navbar.css">
+<link rel="stylesheet" href="../styles/components/buttons.css">
+<link rel="stylesheet" href="../styles/components/card.css">
+<link rel="stylesheet" href="../styles/components/skeleton.css">
+<link rel="stylesheet" href="../styles/components/toast.css">
+<link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
 
@@ -28,7 +29,7 @@
       <a href="search.html">Browse</a>
       <a href="favorites.html">Favorites</a>
     </div>
-    <button class="theme-toggle" aria-label="Toggle theme">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <i class="bi bi-moon-stars"></i>
     </button>
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
@@ -71,5 +72,6 @@
   <script src="../scripts/utils/toast.js"></script>
   <script src="../scripts/utils/scrollUtils.js"></script>
   <script src="../scripts/utils/mobileMenu.js"></script>
+  <script src="../scripts/utils/themeToggle.js"></script>
 </body>
 </html>
