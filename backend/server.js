@@ -20,6 +20,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Savorly API is running' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Savorly API running at http://localhost:${PORT}`);
-});
+// Vercel handles the server lifecycle itself — only call .listen()
+// when running locally, not when deployed as a serverless function.
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Savorly API running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
