@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // much faster when there are several favorites.
     const recipes = await Promise.all(
       favoriteIds.map((id) =>
-        fetch(`http://localhost:5000/api/recipes/${id}`).then((res) => res.json())
+        fetch(`https://savorly-ajwr.onrender.com/api/recipes/${id}`).then((res) => res.json())
       )
     );
 

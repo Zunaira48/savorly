@@ -95,7 +95,7 @@ async function runSearch() {
     if (maxTime) paramsObj.maxTime = maxTime;
 
     const queryString = new URLSearchParams(paramsObj).toString();
-    const res = await fetch(`http://localhost:5000/api/recipes/filter?${queryString}`);
+    const res = await fetch(`https://savorly-ajwr.onrender.com/api/recipes/filter?${queryString}`);
     if (!res.ok) throw new Error('Search failed');
     const results = await res.json();
 
