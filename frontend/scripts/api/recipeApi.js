@@ -1,7 +1,7 @@
 // frontend/scripts/api/recipeApi.js
 // Purpose: Centralizes every fetch call to our backend.
 
-const API_BASE_URL = 'https://savorly-ajwr.onrender.com';
+const API_BASE_URL = 'https://savorly-ajwr.onrender.com/api';
 
 async function fetchRecipes(limit = 8) {
   const res = await fetch(`${API_BASE_URL}/recipes?limit=${limit}`);
