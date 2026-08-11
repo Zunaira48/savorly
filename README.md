@@ -5,6 +5,13 @@
 ![Status](https://img.shields.io/badge/status-active-success)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+## 🔗 Live Demo
+
+- **Frontend:** [savorly-seven.vercel.app](https://savorly-seven.vercel.app)
+- **Backend API:** [savorly-ajwr.onrender.com/api/health](https://savorly-ajwr.onrender.com/api/health)
+
+> ⚠️ The backend is on Render's free tier and sleeps after 15 minutes of inactivity. The first request after sleep can take 30–50 seconds to respond while it wakes up — this is expected, not a bug. Subsequent requests are fast.
+
 ## 📖 Overview
 
 Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 curated recipes. Built with a dark, premium aesthetic inspired by modern consumer products, it demonstrates full-stack development: a REST API backend, a SQLite database, and a responsive, animated frontend — all without a heavy frontend framework.
@@ -111,6 +118,7 @@ Backend runs at `http://localhost:5000`. Open `frontend/pages/index.html` with a
 
 - Favorites are stored per-device (localStorage), not synced across devices — no user accounts yet
 - On serverless deployment platforms, the SQLite database is read-only in production; recipes must be imported locally before deploying
+- The live backend runs on Render's free tier and sleeps after 15 minutes of inactivity — the first request after a period of idle time takes 30–50 seconds to wake up
 
 ## 📄 License
 
