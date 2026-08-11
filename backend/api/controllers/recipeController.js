@@ -74,6 +74,58 @@ function related(req, res) {
   res.json(relatedRecipes.map(formatRecipe));
 }
 
+// Smart ingredient matcher — no external API, pure JS scoring against
+// what's already in the database. A recipe's score is the fraction of
+// its own ingredient list the user already has ("coverage"), so a
+// 3-ingredient recipe you can fully make ranks above a 10-ingredient
+// recipe you're only half-stocked for.
+function matchByIngredients(req, res) {
+  const rawInput = req.query.ingredients || '';
+  const userIngredients = rawInput
+    .split(',')
+    .map((i) => i.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (userIngredients.length === 0) {
+    return res.status(400).json({ error: 'Provide at least one ingredient, e.g. ?ingredients=egg,rice' });
+  }
+
+  const limit = parseInt(req.query.limit, 10) || 12;
+  const allRecipes = recipeModel.getAllRecipesForMatching();
+
+  const scored = allRecipes
+    .map((recipe) => {
+      const recipeIngredients = JSON.parse(recipe.ingredients || '[]');
+      if (recipeIngredients.length === 0) return null;
+
+      const matched = recipeIngredients.filter((ri) =>
+        userIngredients.some((ui) => ri.toLowerCase().includes(ui) || ui.includes(ri.toLowerCase()))
+      );
+      if (matched.length === 0) return null;
+
+      const missing = recipeIngredients.filter((ri) => !matched.includes(ri));
+
+      return {
+        id: recipe.id,
+        name: recipe.name,
+        minutes: recipe.minutes,
+        calories: recipe.calories,
+        category: recipe.category,
+        difficulty: recipe.difficulty,
+        image_url: recipe.image_url,
+        matchedCount: matched.length,
+        totalIngredients: recipeIngredients.length,
+        matchScore: Math.round((matched.length / recipeIngredients.length) * 100) / 100,
+        missingIngredients: missing,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.matchScore - a.matchScore || b.matchedCount - a.matchedCount)
+    .slice(0, limit);
+
+  res.json(scored);
+}
+
 module.exports = {
   listRecipes,
   getRecipe,
@@ -83,4 +135,5 @@ module.exports = {
   categories,
   filterRecipes,
   related,
+  matchByIngredients,
 };

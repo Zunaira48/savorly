@@ -83,6 +83,19 @@ function getRelatedRecipes(category, excludeId, limit = 4) {
   return stmt.all(category, excludeId, limit);
 }
 
+// Fetches the minimal set of columns needed to score ingredient overlap
+// across the whole recipe table. Pulling only what's needed keeps this
+// fast even though it scans all ~5,500 rows on every match request.
+// The actual scoring (which recipes match best) happens in the
+// controller — this function's only job is getting the raw rows.
+function getAllRecipesForMatching() {
+  const stmt = db.prepare(`
+    SELECT id, name, minutes, n_ingredients, calories, tags, category, difficulty, image_url, ingredients
+    FROM recipes
+  `);
+  return stmt.all();
+}
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
@@ -92,4 +105,5 @@ module.exports = {
   getAllCategories,
   filterRecipes,
   getRelatedRecipes,
+  getAllRecipesForMatching,
 };
