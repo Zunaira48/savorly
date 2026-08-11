@@ -4,13 +4,26 @@
 
 function renderRecipeCard(recipe) {
   const favorited = isFavorite(recipe.id);
+  const isMatchResult = recipe.matchScore !== undefined;
+
+  const metaLine = isMatchResult
+    ? `<span><i class="bi bi-check-circle"></i> ${recipe.matchedCount}/${recipe.totalIngredients} ingr.</span>`
+    : `<span><i class="bi bi-list-check"></i> ${recipe.n_ingredients} ingr.</span>`;
+
+  const matchBadge = isMatchResult
+    ? `<span class="match-badge">${Math.round(recipe.matchScore * 100)}% match</span>`
+    : '';
+
+  const missingLine = isMatchResult && recipe.missingIngredients.length > 0
+    ? `<p class="missing-ingredients">Missing: ${recipe.missingIngredients.slice(0, 3).join(', ')}${recipe.missingIngredients.length > 3 ? '…' : ''}</p>`
+    : '';
 
   return `
     <div class="recipe-card" data-id="${recipe.id}">
       <button class="favorite-heart ${favorited ? 'is-favorited' : ''}" data-id="${recipe.id}" aria-label="Toggle favorite">
         <i class="bi ${favorited ? 'bi-heart-fill' : 'bi-heart'}"></i>
       </button>
-      <span class="difficulty-badge difficulty-${recipe.difficulty}">${recipe.difficulty}</span>
+      ${matchBadge || `<span class="difficulty-badge difficulty-${recipe.difficulty}">${recipe.difficulty}</span>`}
       <a href="recipe.html?id=${recipe.id}" class="recipe-card-link">
         <img
           class="recipe-card-image"
@@ -22,8 +35,9 @@ function renderRecipeCard(recipe) {
           <h3 class="recipe-card-title">${recipe.name}</h3>
           <div class="recipe-card-meta">
             <span><i class="bi bi-clock"></i> ${recipe.minutes} min</span>
-            <span><i class="bi bi-list-check"></i> ${recipe.n_ingredients} ingr.</span>
+            ${metaLine}
           </div>
+          ${missingLine}
         </div>
       </a>
     </div>

@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../styles/base/reset.css">
   <link rel="stylesheet" href="../styles/components/navbar.css">
   <link rel="stylesheet" href="../styles/components/hero.css">
+  <link rel="stylesheet" href="../styles/components/matcher.css">
   <link rel="stylesheet" href="../styles/components/card.css">
   <link rel="stylesheet" href="../styles/components/skeleton.css">
   <link rel="stylesheet" href="../styles/main.css">
@@ -94,6 +95,21 @@
   </div>
 </section>
 
+  <!-- ===== INGREDIENT MATCHER (Cook With What You Have) ===== -->
+  <section id="matcher" class="matcher-section">
+    <div class="matcher-header">
+      <h2>🥘 Cook With What You Have</h2>
+      <p>Type the ingredients sitting in your kitchen — we'll rank recipes by how much you can already make.</p>
+    </div>
+    <div class="matcher-input-row">
+      <input type="text" id="matcherInput" placeholder="e.g. eggs, spinach, rice, garlic">
+      <button id="matcherBtn" class="btn-primary-glow">Find Recipes</button>
+    </div>
+    <p class="matcher-hint">Separate ingredients with commas. The more you list, the better the matches.</p>
+    <p id="matcherEmptyMsg" class="matcher-empty-msg">No recipes matched those ingredients yet — try adding a few more.</p>
+    <div id="matcherGrid" class="recipe-grid"></div>
+  </section>
+
   <!-- ===== TRENDING SECTION ===== -->
   <section id="trending" class="section-block">
     <div class="section-header">
@@ -158,6 +174,7 @@
   <script src="../scripts/api/recipeApi.js"></script>
   <script src="../scripts/components/recipeCard.js"></script>
   <script src="../scripts/main.js"></script>
+  <script src="../scripts/pages/ingredientMatcher.js"></script>
 
 </body>
 </html>

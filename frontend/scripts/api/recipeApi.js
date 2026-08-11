@@ -32,3 +32,11 @@ async function fetchRandomRecipe() {
   if (!res.ok) throw new Error('Failed to fetch random recipe');
   return res.json();
 }
+
+// "Cook With What You Have" — sends a comma-separated ingredient list,
+// gets back recipes ranked by how much of each recipe you can already make.
+async function matchByIngredients(ingredients, limit = 8) {
+  const res = await fetch(`${API_BASE_URL}/recipes/match?ingredients=${encodeURIComponent(ingredients)}&limit=${limit}`);
+  if (!res.ok) throw new Error('Ingredient match failed');
+  return res.json();
+}
