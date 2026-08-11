@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const res = await fetch(`http://localhost:5000/api/recipes/${recipeId}`);
+    const res = await fetch(`https://savorly-ajwr.onrender.com/api/recipes/${recipeId}`);
     if (!res.ok) throw new Error('Recipe not found');
     const recipe = await res.json();
 
@@ -98,7 +98,7 @@ function renderRecipe(recipe) {
 
 async function loadRelated(recipeId) {
   try {
-    const res = await fetch(`http://localhost:5000/api/recipes/${recipeId}/related`);
+    const res = await fetch(`https://savorly-ajwr.onrender.com/api/recipes/${recipeId}/related`);
     if (!res.ok) throw new Error('Failed to load related recipes');
     const related = await res.json();
     renderCardGrid(related, 'relatedGrid');
