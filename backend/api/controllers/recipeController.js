@@ -79,14 +79,37 @@ function related(req, res) {
 // its own ingredient list the user already has ("coverage"), so a
 // 3-ingredient recipe you can fully make ranks above a 10-ingredient
 // recipe you're only half-stocked for.
+// Cooking words that add noise if matched literally (measurements, prep
+// instructions) — never useful as a "you have this ingredient" signal.
+const INGREDIENT_STOPWORDS = new Set([
+  'of', 'and', 'or', 'to', 'taste', 'fresh', 'chopped', 'sliced', 'diced',
+  'minced', 'large', 'small', 'medium', 'ground', 'plus', 'extra', 'virgin',
+  'optional', 'cup', 'cups', 'tablespoon', 'tablespoons', 'teaspoon',
+  'teaspoons', 'pound', 'pounds', 'ounce', 'ounces', 'can', 'cans',
+]);
+
+// Splits on any non-letter character (commas, spaces, punctuation all work
+// the same way), drops short/noise words, and strips simple plurals so
+// "eggs" and "egg" are treated as the same ingredient.
+function tokenizeIngredientText(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length >= 3 && !INGREDIENT_STOPWORDS.has(w))
+    .map((w) => {
+      if (w.length > 4 && w.endsWith('ies')) return w.slice(0, -3) + 'y'; // berries -> berry
+      if (w.length > 4 && w.endsWith('es')) return w.slice(0, -2);        // tomatoes -> tomato
+      if (w.length > 3 && w.endsWith('s')) return w.slice(0, -1);         // eggs -> egg
+      return w;
+    });
+}
+
 function matchByIngredients(req, res) {
   const rawInput = req.query.ingredients || '';
-  const userIngredients = rawInput
-    .split(',')
-    .map((i) => i.trim().toLowerCase())
-    .filter(Boolean);
+  const userTokens = new Set(tokenizeIngredientText(rawInput));
 
-  if (userIngredients.length === 0) {
+  if (userTokens.size === 0) {
     return res.status(400).json({ error: 'Provide at least one ingredient, e.g. ?ingredients=egg,rice' });
   }
 
@@ -98,9 +121,10 @@ function matchByIngredients(req, res) {
       const recipeIngredients = JSON.parse(recipe.ingredients || '[]');
       if (recipeIngredients.length === 0) return null;
 
-      const matched = recipeIngredients.filter((ri) =>
-        userIngredients.some((ui) => ri.toLowerCase().includes(ui) || ui.includes(ri.toLowerCase()))
-      );
+      const matched = recipeIngredients.filter((ri) => {
+        const riTokens = tokenizeIngredientText(ri);
+        return riTokens.some((rt) => userTokens.has(rt));
+      });
       if (matched.length === 0) return null;
 
       const missing = recipeIngredients.filter((ri) => !matched.includes(ri));
