@@ -14,10 +14,12 @@
 
 ## 📖 Overview
 
-Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 curated recipes. Built with a dark, premium aesthetic inspired by modern consumer products, it demonstrates full-stack development: a REST API backend, a SQLite database, and a responsive, animated frontend — all without a heavy frontend framework.
+Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 curated recipes — plus an AI-powered "Cook With What You Have" tool that turns whatever's in your kitchen into recipe suggestions. Built with a dark, premium aesthetic inspired by modern consumer products, it demonstrates full-stack development: a REST API backend, a SQLite database, a self-built ingredient-matching algorithm, an LLM integration (Google Gemini), and a responsive, animated frontend — all without a heavy frontend framework.
 
 ## ✨ Features
 
+- 🥘 **Cook With What You Have** — type the ingredients you own, and a self-built scoring algorithm ranks all 5,500+ recipes by how much of each you can already make (shows missing ingredients too)
+- ✨ **AI recipe suggestions** — when nothing in the database fits well, an optional Google Gemini integration generates a brand-new recipe idea from your ingredients on the fly
 - 🔍 Live search with combinable filters (category, difficulty, cook time)
 - 📖 Detailed recipe pages with ingredients, steps, and nutrition info
 - ❤️ Favorites system (persisted via localStorage)
@@ -34,6 +36,7 @@ Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 cura
 **Frontend:** HTML5, CSS3, Bootstrap 5, Vanilla JavaScript
 **Backend:** Node.js, Express.js
 **Database:** SQLite (via better-sqlite3)
+**AI:** Google Gemini API (recipe suggestion fallback)
 **Images:** Unsplash API
 **Version Control:** Git & GitHub
 
@@ -46,6 +49,10 @@ Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 cura
 | Search & Filters | Mobile View |
 |---|---|
 | ![Search](docs/screenshots/search-filters.png) | ![Mobile](docs/screenshots/mobile-view.png) |
+
+| Cook With What You Have | AI Recipe Suggestion |
+|---|---|
+| ![Ingredient Matcher](docs/screenshots/ingredient-matcher.png) | ![AI Suggestion](docs/screenshots/ai-suggestion.png) |
 
 ## 📁 Project Structure
 
@@ -91,7 +98,12 @@ npm install
    ```
    UNSPLASH_ACCESS_KEY=your_key_here
    ```
-3. Build the image pool and import the recipes:
+3. (Optional) Add a free [Google Gemini API key](https://aistudio.google.com/app/apikey) to the same `.env` file to enable AI recipe suggestions:
+   ```
+   GEMINI_API_KEY=your_key_here
+   ```
+   Without this key, the ingredient matcher's algorithm-based results still work fully — only the optional "✨ Ask AI" fallback is disabled.
+4. Build the image pool and import the recipes:
    ```bash
    node data/fetchImages.js
    node data/import.js
@@ -113,12 +125,14 @@ Backend runs at `http://localhost:5000`. Open `frontend/pages/index.html` with a
 - Nutrition-based filtering
 - Meal planning calendar
 - Migrate database to a persistent hosted solution (e.g. PostgreSQL) for production deployment
+- Multi-turn AI chat for recipe suggestions (ask follow-up questions, refine ingredients on the fly)
 
 ## ⚠️ Known Limitations
 
 - Favorites are stored per-device (localStorage), not synced across devices — no user accounts yet
 - On serverless deployment platforms, the SQLite database is read-only in production; recipes must be imported locally before deploying
 - The live backend runs on Render's free tier and sleeps after 15 minutes of inactivity — the first request after a period of idle time takes 30–50 seconds to wake up
+- AI recipe suggestions depend on Google's Gemini free tier, which has daily/per-minute rate limits and is subject to change by Google — the algorithm-based ingredient matcher works independently and is unaffected if the AI fallback is ever unavailable
 
 ## 📄 License
 
