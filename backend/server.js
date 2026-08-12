@@ -2,6 +2,8 @@
 // Purpose: Entry point for our backend. Starts the Express server,
 // applies middleware, and wires up our API routes.
 
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const recipeRoutes = require('./api/routes/recipeRoutes');

@@ -40,3 +40,12 @@ async function matchByIngredients(ingredients, limit = 8) {
   if (!res.ok) throw new Error('Ingredient match failed');
   return res.json();
 }
+
+// Optional AI fallback — generates a brand-new recipe idea from raw
+// ingredients when the algorithm-based matcher doesn't find a great fit.
+// Always resolves cleanly even if the feature is unavailable server-side.
+async function fetchAiSuggestion(ingredients) {
+  const res = await fetch(`${API_BASE_URL}/recipes/ai-suggest?ingredients=${encodeURIComponent(ingredients)}`);
+  if (!res.ok) throw new Error('AI suggestion request failed');
+  return res.json(); // { available: false } OR { available: true, recipe: {...} }
+}

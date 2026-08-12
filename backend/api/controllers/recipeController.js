@@ -150,6 +150,25 @@ function matchByIngredients(req, res) {
   res.json(scored);
 }
 
+const geminiService = require('../services/geminiService');
+
+async function aiSuggestRecipe(req, res) {
+  const ingredients = (req.query.ingredients || '').trim();
+  if (!ingredients) {
+    return res.status(400).json({ error: 'Provide ingredients, e.g. ?ingredients=egg,rice' });
+  }
+
+  const suggestion = await geminiService.suggestRecipeFromIngredients(ingredients);
+
+  if (!suggestion) {
+    // Not a server error — just "AI couldn't help this time". Frontend
+    // treats this the same as "feature unavailable" and hides gracefully.
+    return res.status(200).json({ available: false });
+  }
+
+  res.status(200).json({ available: true, recipe: suggestion });
+}
+
 module.exports = {
   listRecipes,
   getRecipe,
@@ -160,4 +179,5 @@ module.exports = {
   filterRecipes,
   related,
   matchByIngredients,
+  aiSuggestRecipe,
 };

@@ -83,3 +83,53 @@
   font-size: var(--font-size-sm);
   margin-top: 4px;
 }
+
+/* ===== AI Suggestion (Gemini fallback) ===== */
+.ai-suggest-row {
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+.ai-suggest-card {
+  margin-top: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(249, 115, 22, 0.08));
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.ai-suggest-tag {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: #C084FC;
+  margin-bottom: var(--space-xs);
+}
+
+.ai-suggest-card h3 {
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.ai-suggest-card .ai-meta {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.ai-suggest-card ul,
+.ai-suggest-card ol {
+  color: var(--color-text-secondary);
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.ai-suggest-card li {
+  margin-bottom: 4px;
+}
+
+.ai-suggest-disclaimer {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
