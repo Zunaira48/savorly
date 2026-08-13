@@ -1,0 +1,66 @@
+/* frontend/styles/components/dailyPick.css
+   Purpose: Styles for the "Recipe of the Day" featured section — a big,
+   visually distinct card that changes once per day. */
+
+.daily-pick-section {
+  max-width: 1100px;
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+}
+
+.daily-pick-card {
+  position: relative;
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-bg-elevated);
+}
+
+.daily-pick-card.is-loading {
+  min-height: 200px;
+}
+
+.daily-pick-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.daily-pick-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: var(--space-lg);
+  background: linear-gradient(to top, rgba(13, 13, 15, 0.95) 10%, rgba(13, 13, 15, 0.4) 60%, transparent 100%);
+}
+
+.daily-pick-tag {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #0D0D0F;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: var(--space-xs);
+}
+
+.daily-pick-overlay h3 {
+  color: #fff;
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-xs);
+}
+
+.daily-pick-meta {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.daily-pick-meta span {
+  margin-right: var(--space-sm);
+}

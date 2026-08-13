@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../styles/components/navbar.css">
   <link rel="stylesheet" href="../styles/components/hero.css">
   <link rel="stylesheet" href="../styles/components/matcher.css">
+  <link rel="stylesheet" href="../styles/components/dailyPick.css">
   <link rel="stylesheet" href="../styles/components/card.css">
   <link rel="stylesheet" href="../styles/components/skeleton.css">
   <link rel="stylesheet" href="../styles/main.css">
@@ -102,17 +103,30 @@
       <p>Type the ingredients sitting in your kitchen — we'll rank recipes by how much you can already make.</p>
     </div>
     <div class="matcher-input-row">
-      <input type="text" id="matcherInput" placeholder="e.g. eggs, spinach, rice, garlic">
+      <div class="matcher-input-wrap">
+        <input type="text" id="matcherInput" placeholder="e.g. eggs, spinach, rice, garlic">
+        <button id="matcherVoiceBtn" class="matcher-voice-btn" aria-label="Speak your ingredients" title="Speak your ingredients" style="display:none;">
+          <i class="bi bi-mic"></i>
+        </button>
+      </div>
       <button id="matcherBtn" class="btn-primary-glow">Find Recipes</button>
     </div>
-    <p class="matcher-hint">Separate ingredients with commas. The more you list, the better the matches.</p>
+    <p class="matcher-hint">Separate ingredients with commas. The more you list, the better the matches. <span class="matcher-shortcut-hint">Press <kbd>/</kbd> to jump here.</span></p>
     <p id="matcherEmptyMsg" class="matcher-empty-msg">No recipes matched those ingredients yet — try adding a few more.</p>
     <div id="matcherGrid" class="recipe-grid"></div>
 
-    <div id="aiSuggestRow" class="ai-suggest-row" style="display:none;">
+    <div id="matcherActionsRow" class="matcher-actions-row" style="display:none;">
       <button id="aiSuggestBtn" class="btn-outline-ghost">✨ Ask AI for a recipe idea instead</button>
+      <button id="shareMatchBtn" class="btn-outline-ghost"><i class="bi bi-share"></i> Share this match</button>
     </div>
     <div id="aiSuggestResult"></div>
+  </section>
+
+  <!-- ===== RECIPE OF THE DAY ===== -->
+  <section id="dailyPick" class="daily-pick-section">
+    <div id="dailyPickContent" class="daily-pick-card">
+      <!-- Filled by JS — deterministic pick based on today's date -->
+    </div>
   </section>
 
   <!-- ===== TRENDING SECTION ===== -->
@@ -180,6 +194,7 @@
   <script src="../scripts/components/recipeCard.js"></script>
   <script src="../scripts/main.js"></script>
   <script src="../scripts/pages/ingredientMatcher.js"></script>
+  <script src="../scripts/pages/dailyPick.js"></script>
 
 </body>
 </html>
