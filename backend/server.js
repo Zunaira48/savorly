@@ -2,7 +2,7 @@
 // Purpose: Entry point for our backend. Starts the Express server,
 // applies middleware, and wires up our API routes.
 
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 
 const express = require('express');
 const cors = require('cors');
@@ -22,9 +22,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Savorly API is running' });
 });
 
-// Vercel handles the server lifecycle itself — only call .listen()
-// when running locally, not when deployed as a serverless function.
-if (process.env.VERCEL !== '1') {
+// Vercel handles the server lifecycle itself, and tests import this file
+// just to get `app` without needing a real listening port — only start
+// the server when running normally (not on Vercel, not under Jest).
+if (process.env.VERCEL !== '1' && process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`🚀 Savorly API running at http://localhost:${PORT}`);
   });

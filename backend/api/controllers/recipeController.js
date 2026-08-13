@@ -180,4 +180,7 @@ module.exports = {
   related,
   matchByIngredients,
   aiSuggestRecipe,
+  // Exposed only for unit testing the ingredient-matching logic directly —
+  // not part of the public API surface.
+  __testing__: { tokenizeIngredientText },
 };

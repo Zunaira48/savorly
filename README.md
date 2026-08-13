@@ -2,6 +2,7 @@
 
 > Discover what to cook next. A modern, full-stack recipe discovery platform built with Node.js, Express, SQLite, and vanilla JavaScript.
 
+![CI](https://github.com/Zunaira48/savorly/actions/workflows/ci.yml/badge.svg)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -37,6 +38,7 @@ Savorly is a portfolio-scale recipe discovery platform featuring over 5,500 cura
 **Backend:** Node.js, Express.js
 **Database:** SQLite (via better-sqlite3)
 **AI:** Google Gemini API (recipe suggestion fallback)
+**Testing:** Jest, Supertest, GitHub Actions (CI)
 **Images:** Unsplash API
 **Version Control:** Git & GitHub
 
@@ -116,6 +118,17 @@ node server.js
 ```
 
 Backend runs at `http://localhost:5000`. Open `frontend/pages/index.html` with a local server (e.g. VS Code's Live Server extension) to run the frontend.
+
+## ✅ Testing
+
+The backend has a Jest + Supertest suite covering the API's core behavior — recipe listing, search, categories, the ingredient-matching algorithm (including a regression test for a substring-matching bug caught during development), and graceful degradation when the optional AI feature has no API key configured.
+
+```bash
+cd backend
+npm test
+```
+
+Every push and pull request to `main` runs this suite automatically via [GitHub Actions](.github/workflows/ci.yml) — see the badge at the top of this README for current status.
 
 ## 🗺️ Future Improvements
 
